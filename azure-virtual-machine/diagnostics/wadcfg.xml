@@ -1,0 +1,18 @@
+<WadCfg>
+    <DiagnosticMonitorConfiguration overallQuotaInMB="4096" xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+        <PerformanceCounters scheduledTransferPeriod="PT1M" sinks="AzMonSink">
+            <PerformanceCounterConfiguration counterSpecifier="\Processor(_Total)\% Processor Time" sampleRate="PT15S" unit="Percent"><annotation displayName="CPU usage" locale="en-us"/></PerformanceCounterConfiguration>
+            <PerformanceCounterConfiguration counterSpecifier="\Memory\% Committed Bytes In Use" sampleRate="PT15S" unit="Percent"><annotation displayName="Memory usage" locale="en-us"/></PerformanceCounterConfiguration>
+            <PerformanceCounterConfiguration counterSpecifier="\LogicalDisk(C:)\% Free Space" sampleRate="PT15S" unit="Percent"><annotation displayName="OS Disk usage" locale="en-us"/></PerformanceCounterConfiguration>
+        </PerformanceCounters>
+        <Metrics resourceId="${resource_id}">
+            <MetricAggregation scheduledTransferPeriod="PT1H"/>
+            <MetricAggregation scheduledTransferPeriod="PT1M"/>
+        </Metrics>
+    </DiagnosticMonitorConfiguration>
+    <SinksConfig>
+        <Sink name="AzMonSink">
+            <AzureMonitor></AzureMonitor>
+        </Sink>
+    </SinksConfig>
+</WadCfg>
